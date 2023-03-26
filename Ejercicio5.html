@@ -1,0 +1,111 @@
+<script>
+/*
+Ejercicio:
+
+Escriba una función que invierta los caracteres en paréntesis (posiblemente
+anidados) en la cadena de entrada.
+
+Las cadenas de entrada siempre estarán bien formadas con ()s conincidentes.
+
+Ejemplo:
+
+inputString = "(bar)"
+
+El resultado debería ser:
+
+solution(inputString) = "rab"
+
+Ejemplo 2:
+
+inputString = "foo(bar)baz"
+
+El resultado debería ser:
+
+solution(inputString) = "foorabbaz"
+
+Ejemplo 3:
+
+inputString = "foo(bar)baz(blim)"
+
+El resultado debería ser:
+
+solution(inputString) = "foorabbazmilb"
+
+Ejemplo 4:
+
+inputString = "foo(bar(baz))blim"
+
+EL resultado debería ser:
+
+solution(inputString) = "foobazrabblim"
+
+Porque "foo(bar(baz))blim" se convierte en "foo(barzab)blim" y entonces
+"foobazrabblim" es el resultado.
+*/
+
+function solution(cadena) {
+    const pila = [];
+    let cadenaSalida = '';
+
+    for (let i = 0; i < cadena.length; i++) {
+        const caracter = cadena[i];
+
+        if (caracter === '(') {
+        pila.push(cadenaSalida);
+        cadenaSalida = '';
+        } else if (caracter === ')') {
+        const cadenaDesapilada = pila.pop();
+        cadenaSalida = cadenaDesapilada + cadenaSalida.split('').reverse().join('');
+        } else {
+        cadenaSalida += caracter;
+        }
+    }
+    return cadenaSalida;
+}
+
+
+
+// No tocar de aquí para abajo.
+
+const tests = [
+    "(bar)", // output = "rab"
+    "foo(bar)baz", // output = "foorabbaz"
+    "foo(bar)baz(blim)", // output = "foorabbazmilb"
+    "foo(bar(baz))blim", // output = "foobazrabblim"
+    "", // output = ""
+    "()", // output = ""
+    "(abc)d(efg)", // output = "cbadgfe"
+];
+
+function evaluar(){
+    console.log(solution(tests[0]) === "rab"
+                    ? `Test 0 completado ✔`
+                    : `Test 0 no completado ❌`);
+
+    console.log(solution(tests[1]) === "foorabbaz"
+                    ? `Test 1 completado ✔`
+                    : `Test 1 no completado ❌`);     
+    
+    console.log(solution(tests[2]) === "foorabbazmilb"
+                    ? `Test 2 completado ✔`
+                    : `Test 2 no completado ❌`);  
+    
+    console.log(solution(tests[3]) === "foobazrabblim"
+                    ? `Test 3 completado ✔`
+                    : `Test 3 no completado ❌`); 
+
+    console.log(solution(tests[4]) === ""
+                    ? `Test 4 completado ✔`
+                    : `Test 4 no completado ❌`); 
+
+    console.log(solution(tests[5]) === ""
+                    ? `Test 5 completado ✔`
+                    : `Test 5 no completado ❌`);
+
+    console.log(solution(tests[6]) === "cbadgfe"
+                    ? `Test 6 completado ✔`
+                    : `Test 6 no completado ❌`);
+}
+
+evaluar();
+</script>

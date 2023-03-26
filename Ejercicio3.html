@@ -1,0 +1,100 @@
+<script>
+/*
+Ejercicio: 
+
+Unas personas están en fila en un parque. Entre ellas hay árboles que no se pueden mover. 
+Tu tarea consiste en reordenar a las personas por su altura en un orden no descendente 
+sin mover los árboles. Las personas pueden ser muy altas.
+
+Ejemplo: 
+
+a = [-1, 150, 190, 170, -1, -1, 160, 180]
+
+El resultado debería ser: 
+
+solution(a) = [-1, 150, 160, 170, -1, -1, 180, 190]
+
+*/
+function solution(a) {
+    const alturas = a.filter(x => x !== -1);
+    alturas.sort((a, b) => a - b);
+    let j = 0;
+    for (let i = 0; i < a.length; i++) {
+        if (a[i] !== -1) {
+        a[i] = alturas[j];
+        j++;
+        }
+    }
+    return a;
+}
+
+
+
+
+
+
+
+
+
+//No tocar de aquí para abajo
+
+const tests = [
+    [-1, 150, 190, 170, -1, -1, 160, 180], // output = [-1, 150, 160, 170, -1, -1, 180, 190]
+    [-1, -1, -1, -1, -1], // output = [-1, -1, -1, -1, -1]
+    [-1], // output = [-1]
+    [4, 2, 9, 11, 2, 16], // output = [2, 2, 4, 9, 11, 16]
+    [2, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, 1], // output = [1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, 2]
+    [23, 54, -1, 43, 1, -1, -1, 77, -1, -1, -1, 3], // output = [1, 3, -1, 23, 43, -1, -1, 54, -1, -1, -1, 77]
+];
+
+function sonArreglosIguales(arrayUno, arrayDos){
+    if(arrayUno.length !== arrayDos.length) return false;
+    
+    for(let i = 0; i < arrayUno.length; i++){
+        if(arrayUno[i] !== arrayDos[i]) return false;
+    }
+
+    return true;
+}
+
+function evaluar(){
+    console.log(sonArreglosIguales(
+                    solution(tests[0]), 
+                    [-1, 150, 160, 170, -1, -1, 180, 190])
+                    ? "Test 0 completado ✔"
+                    : "Test 0 no completado ❌");
+
+    console.log(sonArreglosIguales(
+                solution(tests[1]),
+                [-1, -1, -1, -1, -1])
+                ? "Test 1 completado ✔"
+                : "Test 1 no completado ❌");
+
+    console.log(sonArreglosIguales(
+                    solution(tests[2]),
+                    [-1])
+                    ? "Test 2 completado ✔"
+                    : "Test 2 no completado ❌");
+
+    console.log(sonArreglosIguales(
+                    solution(tests[3]),
+                    [2, 2, 4, 9, 11, 16])
+                    ? "Test 3 completado ✔"
+                    : "Test 3 no completado ❌");
+
+    console.log(sonArreglosIguales(
+                    solution(tests[4]),
+                    [1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, 2])
+                    ? "Test 4 completado ✔"
+                    : "Test 4 no completado ❌");
+    
+    console.log(sonArreglosIguales(
+                    solution(tests[5]),
+                    [1, 3, -1, 23, 43, -1, -1, 54, -1, -1, -1, 77])
+                    ? "Test 5 completado ✔"
+                    : "Test 5 no completado ❌");
+}
+
+evaluar();
+
+</script>

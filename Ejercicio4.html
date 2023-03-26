@@ -1,0 +1,101 @@
+<script>
+/*
+Ejercicio:
+
+Dos arreglos se llaman similares si una puede obtenerse a partir del otro 
+intercambiando como máximo un par de elementos de uno de los arreglos.
+
+Dados dos arreglos a y b, comprueba si son similares.
+
+Ejemplo: 
+
+a = [1, 2, 3]
+b = [1, 2, 3]
+
+El resultado debería ser: 
+
+solution(a, b) = true.
+
+Los arreglos son iguales, no es necesario intercambiar ningún elemento.
+
+Ejemplo 2: 
+
+a = [1, 2, 3]
+b = [2, 1, 3]
+
+El resultado debería ser:
+
+solution(a, b) = true.
+
+Podemos obtener b a partir de a intercambiando 2 y 1 en b.
+
+Ejemplo 3:
+
+a = [1, 2, 2]
+b = [2, 1, 1]
+
+El resultado debería ser: 
+
+solution(a, b) = false.
+
+Cualquier intercambio de dos elementos cualquiera en a o en b no hará a 
+y b iguales.
+
+*/
+
+
+function solution(a, b) {
+    const n = a.length;
+    let posicionesDiferentes = [];
+
+    if (JSON.stringify(a) === JSON.stringify(b)) {
+        return true;
+    }
+
+    for (let i = 0; i < n; i++) {
+        if (a[i] !== b[i]) {
+        posicionesDiferentes.push(i);
+        if (posicionesDiferentes.length > 2) {
+            return false;
+        }
+        }
+    }
+
+    const [p1, p2] = posicionesDiferentes;
+    return a[p1] === b[p2] && a[p2] === b[p1];
+}
+
+
+
+//No tocar de aquí para abajo
+
+const tests = [
+    [[1, 2, 3], [1, 2, 3]], // output = true
+    [[1, 2, 3], [2, 1, 3]], // output = true
+    [[1, 2, 2], [2, 1, 1]], // output = false
+    [[1, 2, 1, 2], [2, 2, 1, 1]], // output = true
+    [[1, 2, 1, 2, 2, 1], [2, 2, 1, 1, 2, 1]], // output = true
+    [[1, 1, 4], [1, 2, 3]], // output = false
+    [[1, 2, 3], [1, 10, 2]], // output = false
+    [[2, 3, 1], [1, 3, 2]], // output = true
+    [[2, 3, 9], [10, 3, 2]], // output = false
+    [[832, 998, 148, 570, 533, 561, 894, 147, 455, 279], 
+    [832, 570, 148, 998, 533, 561, 455, 147, 894, 279]] // output = false
+];
+
+function evaluar(){
+    for(let i = 0; i < tests.length; i++){
+        if((i >= 0 && i < 2) || (i > 2 && i < 5) || i === 7){
+            console.log(solution(tests[i][0], tests[i][1])
+                            ? `Test ${i} completado ✔`
+                            : `Test ${i} no completado ❌`);
+        }else{
+            console.log(!solution(tests[i][0], tests[i][1])
+                            ? `Test ${i} completado ✔`
+                            : `Test ${i} no completado ❌`);
+        }
+    }
+}
+
+evaluar();
+</script>

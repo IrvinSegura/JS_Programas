@@ -1,0 +1,138 @@
+<script>
+
+/*
+
+Ejercicio:
+
+Dada una matriz rectangular de caracteres, añádele un borde 
+de asteriscos(*).
+
+Ejemplo: 
+
+picture = ["abc",
+           "ded"]
+
+El resultado debería ser: 
+
+solution(picture) = ["*****",
+                     "*abc*",
+                     "*ded*",
+                     "*****"]
+
+*/
+
+function solution(picture) {
+    const filas = picture.length;
+    const columnas = picture[0].length;
+
+    for (let i = 0; i < filas; i++) {
+        picture[i] = `*${picture[i]}*`;
+    }
+
+    const borde = '*'.repeat(columnas + 2);
+    picture.unshift(borde);
+    picture.push(borde);
+
+    return picture;
+}
+
+
+
+
+// No tocar de aquí para abajo.
+
+const tests = [
+    ["abc", 
+     "ded"], /* output = ["*****", 
+                          "*abc*", 
+                          "*ded*", 
+                          "*****" ] */
+
+    ["a"], /* output = ["***", 
+                        "*a*", 
+                        "***"] */
+    ["aa", 
+     "**",  
+     "zz"], /* output = ["****", 
+                        "*aa*", 
+                        "****", 
+                        "*zz*", 
+                        "****"] */
+    ["abcde", 
+     "fghij", 
+     "klmno", 
+     "pqrst", 
+     "uvwxy"], /* output = ["*******", 
+                            "*abcde*", 
+                            "*fghij*", 
+                            "*klmno*", 
+                            "*pqrst*", 
+                            "*uvwxy*", 
+                            "*******"] */
+
+    ["wzy**"], /* output = ["*******", 
+                            "*wzy***", 
+                            "*******"] */
+];
+
+function sonArreglosIguales(arrayUno, arrayDos){
+    if(arrayUno.length !== arrayDos.length) return false;
+    
+    for(let i = 0; i < arrayUno.length; i++){
+        if(arrayUno[i] !== arrayDos[i]) return false;
+    }
+
+    return true;
+}
+
+function evaluar(){
+    console.log(sonArreglosIguales(
+                    solution(tests[0]), 
+                    ["*****", 
+                     "*abc*", 
+                     "*ded*", 
+                     "*****" ])
+                    ? "Test 0 completado ✔"
+                    : "Test 0 no completado ❌");
+                        
+    console.log(sonArreglosIguales(
+                    solution(tests[1]), 
+                    ["***", 
+                     "*a*", 
+                     "***"])
+                    ? "Test 1 completado ✔"
+                    : "Test 1 no completado ❌");
+
+    console.log(sonArreglosIguales(
+                    solution(tests[2]),
+                    ["****", 
+                     "*aa*", 
+                     "****", 
+                     "*zz*", 
+                     "****"])
+                    ? "Test 2 completado ✔"
+                    : "Test 2 no completado ❌");
+    
+    console.log(sonArreglosIguales(
+                    solution(tests[3]), 
+                    ["*******", 
+                     "*abcde*", 
+                     "*fghij*", 
+                     "*klmno*", 
+                     "*pqrst*", 
+                     "*uvwxy*", 
+                     "*******"])
+                    ? "Test 3 completado ✔"
+                    : "Test 3 no completado ❌");   
+                            
+    console.log(sonArreglosIguales(
+                    solution(tests[4]), 
+                    [ "*******", 
+                      "*wzy***", 
+                      "*******"])
+                    ? "Test 4 completado ✔"
+                    : "Test 4 no completado ❌");
+}
+
+evaluar();
+</script>

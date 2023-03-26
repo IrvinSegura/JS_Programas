@@ -1,0 +1,90 @@
+<script>
+
+/*
+
+Ejercicio: 
+
+Dada una cadena, averigua si sus caracteres pueden reordenarse
+para formar un palindromo.
+
+Ejemplo: 
+
+inputString = "aabb"
+
+El resultado debería ser:
+
+solution(inputString) = true
+
+Podemos reordenar "aabb" para formar "abba", que es un palíndromo.
+
+*/
+
+function solution(cadena){
+    const frecuenciaCaracteres = {};
+    for (let i = 0; i < cadena.length; i++) {
+        const caracter = cadena[i];
+        frecuenciaCaracteres[caracter] = frecuenciaCaracteres[caracter] + 1 || 1;
+    }
+    
+    let cantidadCaracteresImpares = 0;
+    for (const caracter in frecuenciaCaracteres) {
+        if (frecuenciaCaracteres[caracter] % 2 !== 0) {
+        cantidadCaracteresImpares++;
+        }
+        if (cantidadCaracteresImpares > 1) {
+        return false;
+        }
+    }
+    return true;
+}
+
+
+    
+
+function esPalindromo(palabra) {
+    var alReves = palabra.split("").reverse().join("");
+    if (palabra == alReves){
+        return true;
+    }
+    else if(palabra!=alReves){
+        return true;
+    }
+}
+
+
+
+
+
+// No tocar de aquí para abajo.
+
+const tests = [
+    "aabb", // output = true
+    "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaabc", // output = false
+    "abbcabb", // output = true
+    "zyyzzzzz", // output = true
+    "z", // output = true
+    "zaa", // output = true
+    "abca", // output = false
+    "abcad", // output = false
+    "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaabbbccccaaaaaaaaaaaaa", // output = false
+    "abdhuierf", // output = false
+];
+
+function evaluar(){
+    for(let i = 0; i < tests.length; i++){
+        if(i === 0 || (i > 1 && i < 6)){
+            console.log(solution(tests[i]) 
+                    ? `Test ${i} completado ✔`
+                    : `Test ${i} no completado ❌`);
+        }else{
+            console.log(!solution(tests[i]) 
+                    ? `Test ${i} completado ✔`
+                    : `Test ${i} no completado ❌`);
+        }
+    }
+}
+
+evaluar();
+
+
+</script>
